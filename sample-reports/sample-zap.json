@@ -1,0 +1,54 @@
+{
+  "@version": "2.14.0",
+  "@generated": "Mon, 1 Jul 2024 10:00:00",
+  "site": [
+    {
+      "@name": "https://demo.example.com",
+      "@host": "demo.example.com",
+      "@port": "443",
+      "@ssl": "true",
+      "alerts": [
+        {
+          "pluginid": "10202",
+          "alertRef": "10202-1",
+          "alert": "Absence of Anti-CSRF Tokens",
+          "name": "Absence of Anti-CSRF Tokens",
+          "riskcode": "2",
+          "confidence": "2",
+          "riskdesc": "Medium (Low)",
+          "desc": "No Anti-CSRF tokens were found in a HTML submission form. A CSRF attack forces a logged-on victim's browser to send a forged HTTP request to a vulnerable web application.",
+          "solution": "Use the OWASP CSRF Guard or a similar library. Include a unique anti-CSRF token in every form.",
+          "instances": [
+            { "uri": "https://demo.example.com/account/settings", "method": "GET" },
+            { "uri": "https://demo.example.com/transfer", "method": "POST" }
+          ]
+        },
+        {
+          "pluginid": "40012",
+          "alertRef": "40012-1",
+          "alert": "Cross Site Scripting (Reflected)",
+          "name": "Cross Site Scripting (Reflected)",
+          "riskcode": "3",
+          "confidence": "3",
+          "riskdesc": "High (High)",
+          "desc": "Cross-site Scripting (XSS) is a client-side attack where the attacker injects malicious script that runs in the victim's browser. Found in the q parameter of the search page.",
+          "solution": "HTML-encode user input before reflecting it. Use a templating engine with auto-escaping. Set Content-Security-Policy headers.",
+          "instances": [
+            { "uri": "https://demo.example.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E", "method": "GET", "param": "q" }
+          ]
+        },
+        {
+          "pluginid": "10038",
+          "alert": "Content Security Policy (CSP) Header Not Set",
+          "name": "Content Security Policy (CSP) Header Not Set",
+          "riskcode": "2",
+          "confidence": "3",
+          "riskdesc": "Medium (High)",
+          "desc": "CSP is an effective measure to protect from XSS attacks. By whitelisting sources of approved content, attacks are mitigated.",
+          "solution": "Configure the server to send a Content-Security-Policy header on responses.",
+          "instances": [{ "uri": "https://demo.example.com/", "method": "GET" }]
+        }
+      ]
+    }
+  ]
+}

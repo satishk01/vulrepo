@@ -1,0 +1,34 @@
+{
+  "projectName": "my-app",
+  "displayTargetFile": "package-lock.json",
+  "vulnerabilities": [
+    {
+      "id": "SNYK-JS-LODASH-567746",
+      "title": "Prototype Pollution",
+      "description": "Versions of the package lodash prior to 4.17.21 are vulnerable to Prototype Pollution via the set method.",
+      "severity": "high",
+      "cvssScore": 7.4,
+      "packageName": "lodash",
+      "version": "4.17.20",
+      "fixedIn": ["4.17.21"],
+      "identifiers": {
+        "CVE": ["CVE-2021-23337"],
+        "CWE": ["400"]
+      }
+    },
+    {
+      "id": "SNYK-JS-AXIOS-1579269",
+      "title": "Regular Expression Denial of Service (ReDoS)",
+      "description": "Axios 0.21.1 allows attackers to cause a denial of service via URL with excessive characters.",
+      "severity": "medium",
+      "cvssScore": 5.3,
+      "packageName": "axios",
+      "version": "0.21.1",
+      "fixedIn": ["0.21.2"],
+      "identifiers": {
+        "CVE": ["CVE-2021-3749"],
+        "CWE": ["400"]
+      }
+    }
+  ]
+}

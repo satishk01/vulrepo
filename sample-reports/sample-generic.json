@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Open Redirect in /auth/callback",
+    "description": "The redirect_url parameter in /auth/callback is not validated against a whitelist, allowing attackers to send users to phishing pages after a legitimate login flow.",
+    "severity": "medium",
+    "location": "src/auth/callback.go:55"
+  },
+  {
+    "name": "Insecure Deserialization in session handler",
+    "details": "The session middleware deserializes pickle-encoded cookies without integrity verification, allowing remote code execution if an attacker controls the cookie.",
+    "risk": "critical",
+    "file": "app/middleware/session.py"
+  },
+  {
+    "rule": "Weak random number generator used for password reset tokens",
+    "message": "Math.random() is used to generate password reset tokens. Predictable tokens allow account takeover.",
+    "priority": "high",
+    "path": "src/auth/reset.js:23"
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "scan_id": "test-scan-001",
+  "findings": [
+    {
+      "id": "test-scan-001-f1",
+      "title": "SQL Injection in userRepo.js",
+      "description": "User-controlled data flows directly into SQL query at line 42. An attacker could extract or modify database records.",
+      "severity": "high",
+      "cvss_score": 8.5,
+      "cve_ids": [],
+      "cwe_ids": ["CWE-89"],
+      "file_path": "src/db/userRepo.js",
+      "line_number": 42,
+      "tool": "semgrep",
+      "scan_type": "sast"
+    },
+    {
+      "id": "test-scan-001-f2",
+      "title": "Reflected XSS in search endpoint",
+      "description": "User input is returned in HTTP response without HTML encoding, enabling script injection.",
+      "severity": "medium",
+      "cvss_score": 6.1,
+      "cve_ids": [],
+      "cwe_ids": ["CWE-79"],
+      "file_path": "src/api/search.js",
+      "line_number": 88,
+      "tool": "semgrep",
+      "scan_type": "sast"
+    },
+    {
+      "id": "test-scan-001-f3",
+      "title": "AWS Secret Key hardcoded in source",
+      "description": "AWS_SECRET_ACCESS_KEY value found as string literal in source code.",
+      "severity": "critical",
+      "cvss_score": 9.1,
+      "cve_ids": [],
+      "cwe_ids": ["CWE-798"],
+      "file_path": "src/config/aws.js",
+      "line_number": 5,
+      "tool": "semgrep",
+      "scan_type": "sast"
+    },
+    {
+      "id": "test-scan-001-f4",
+      "title": "CVE-2023-44487 in http2 (RAPID RESET)",
+      "description": "The HTTP/2 protocol allows a denial of service because request cancellation can reset many streams quickly.",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "cve_ids": ["CVE-2023-44487"],
+      "cwe_ids": ["CWE-400"],
+      "component": "node:18.15.0",
+      "tool": "trivy",
+      "scan_type": "sca"
+    }
+  ],
+  "asset_context": {
+    "service_name": "payments-api",
+    "environment": "production",
+    "internet_facing": true,
+    "handles_pii": true,
+    "handles_payments": true,
+    "tech_stack": ["Node.js", "PostgreSQL", "React", "Docker"],
+    "criticality": "critical"
+  },
+  "org_context": {
+    "team_ownership": {
+      "payments-api": "payments-team",
+      "src/db": "backend-team",
+      "src/api": "api-team"
+    },
+    "sla_hours": {
+      "critical": 24,
+      "high": 168,
+      "medium": 720,
+      "low": 2160
+    },
+    "jira_project_key": "SEC",
+    "github_repo": "myorg/payments-api"
+  },
+  "model_id": "anthropic.claude-sonnet-4-5"
+}

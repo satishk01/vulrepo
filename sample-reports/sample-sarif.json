@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "semgrep",
+          "version": "1.99.0",
+          "informationUri": "https://semgrep.dev",
+          "rules": [
+            {
+              "id": "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+              "name": "tainted-sql-string",
+              "shortDescription": { "text": "SQL injection via tainted string concatenation" },
+              "help": { "text": "Use parameterized queries with placeholders. e.g. cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,)) instead of f-string concatenation." },
+              "properties": {
+                "security-severity": "8.8",
+                "tags": ["CWE-89", "OWASP-A03", "security"]
+              }
+            },
+            {
+              "id": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+              "name": "direct-response-write",
+              "shortDescription": { "text": "User input echoed into HTTP response without escaping" },
+              "help": { "text": "Use a templating engine with auto-escaping, or sanitize user input before writing it to the response." },
+              "properties": {
+                "security-severity": "6.1",
+                "tags": ["CWE-79", "OWASP-A03", "security"]
+              }
+            },
+            {
+              "id": "generic.secrets.security.detected-aws-access-key.detected-aws-access-key",
+              "name": "detected-aws-access-key",
+              "shortDescription": { "text": "AWS access key detected in source code" },
+              "help": { "text": "Move secrets to AWS Secrets Manager or environment variables. Rotate the leaked key immediately." },
+              "properties": {
+                "security-severity": "9.1",
+                "tags": ["CWE-798", "security"]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "python.flask.security.injection.tainted-sql-string.tainted-sql-string",
+          "level": "error",
+          "message": { "text": "Detected user input concatenated directly into a SQL string. This is vulnerable to SQL injection." },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/db/user_repo.py" },
+              "region": { "startLine": 42, "endLine": 42 }
+            }
+          }]
+        },
+        {
+          "ruleId": "javascript.express.security.audit.xss.direct-response-write.direct-response-write",
+          "level": "warning",
+          "message": { "text": "User-controlled value from req.query.q is written to response without escaping." },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/api/search.js" },
+              "region": { "startLine": 88, "endLine": 88 }
+            }
+          }]
+        },
+        {
+          "ruleId": "generic.secrets.security.detected-aws-access-key.detected-aws-access-key",
+          "level": "error",
+          "message": { "text": "AWS_ACCESS_KEY_ID value found in source. Hardcoded secrets are a critical risk." },
+          "locations": [{
+            "physicalLocation": {
+              "artifactLocation": { "uri": "src/config/aws.js" },
+              "region": { "startLine": 5, "endLine": 5 }
+            }
+          }]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "myapp:1.2.3",
+  "ArtifactType": "container_image",
+  "Results": [
+    {
+      "Target": "myapp:1.2.3 (debian 11.7)",
+      "Type": "debian",
+      "Class": "os-pkgs",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-44487",
+          "PkgName": "libssl1.1",
+          "InstalledVersion": "1.1.1n-0+deb11u3",
+          "FixedVersion": "1.1.1n-0+deb11u5",
+          "Severity": "HIGH",
+          "Title": "HTTP/2 Rapid Reset attack",
+          "Description": "The HTTP/2 protocol allows denial of service through stream cancellation that resets many streams quickly.",
+          "CVSS": {
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": ["https://nvd.nist.gov/vuln/detail/CVE-2023-44487"]
+        }
+      ]
+    },
+    {
+      "Target": "app/package-lock.json",
+      "Type": "npm",
+      "Class": "lang-pkgs",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2024-28849",
+          "PkgName": "follow-redirects",
+          "InstalledVersion": "1.15.2",
+          "FixedVersion": "1.15.6",
+          "Severity": "MEDIUM",
+          "Title": "follow-redirects leaks authorization header on cross-origin redirect",
+          "Description": "Versions of follow-redirects before 1.15.6 leak the Authorization header to third parties on cross-origin redirects.",
+          "CVSS": {
+            "nvd": { "V3Score": 6.5 }
+          }
+        },
+        {
+          "VulnerabilityID": "CVE-2024-29041",
+          "PkgName": "express",
+          "InstalledVersion": "4.18.2",
+          "FixedVersion": "4.19.2",
+          "Severity": "MEDIUM",
+          "Title": "Express open redirect on unsanitized URL",
+          "Description": "Versions of Express before 4.19.2 are vulnerable to open redirect through unsanitized URLs passed to res.redirect()."
+        }
+      ]
+    }
+  ]
+}

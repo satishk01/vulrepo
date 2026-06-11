@@ -1,0 +1,47 @@
+{
+  "Findings": [
+    {
+      "Id": "arn:aws:securityhub:us-east-1:111122223333:subscription/aws-foundational-security-best-practices/v/1.0.0/S3.5/finding/abc-001",
+      "AwsAccountId": "111122223333",
+      "ProductName": "Security Hub",
+      "Title": "S3 buckets should require requests to use Secure Socket Layer",
+      "Description": "This control checks whether S3 buckets have policies that require requests to use SSL/TLS. Buckets without this policy can be accessed over plain HTTP.",
+      "Severity": { "Label": "HIGH", "Normalized": 70 },
+      "Remediation": {
+        "Recommendation": {
+          "Text": "Attach a bucket policy that denies any s3 action when aws:SecureTransport is false.",
+          "Url": "https://docs.aws.amazon.com/securityhub/latest/userguide/s3-controls.html#s3-5"
+        }
+      },
+      "Resources": [{ "Type": "AwsS3Bucket", "Id": "arn:aws:s3:::company-backups-prod" }]
+    },
+    {
+      "Id": "arn:aws:securityhub:us-east-1:111122223333:subscription/aws-foundational-security-best-practices/v/1.0.0/IAM.7/finding/abc-002",
+      "AwsAccountId": "111122223333",
+      "ProductName": "Security Hub",
+      "Title": "Password policies for IAM users should have strong configurations",
+      "Description": "Account password policy does not meet recommended strength (no minimum length, no symbol requirement).",
+      "Severity": { "Label": "MEDIUM", "Normalized": 40 },
+      "Remediation": {
+        "Recommendation": {
+          "Text": "Configure the IAM account password policy to require at least 14 characters, one uppercase, one number, and one symbol."
+        }
+      },
+      "Resources": [{ "Type": "AwsAccount", "Id": "AWS::::Account:111122223333" }]
+    },
+    {
+      "Id": "arn:aws:securityhub:us-east-1:111122223333:subscription/aws-foundational-security-best-practices/v/1.0.0/EC2.2/finding/abc-003",
+      "AwsAccountId": "111122223333",
+      "ProductName": "Security Hub",
+      "Title": "Default security group allows inbound traffic from 0.0.0.0/0",
+      "Description": "The default security group for VPC vpc-0abc123 allows unrestricted inbound traffic from the internet.",
+      "Severity": { "Label": "CRITICAL", "Normalized": 90 },
+      "Remediation": {
+        "Recommendation": {
+          "Text": "Remove all inbound and outbound rules from the default security group. Use purpose-built security groups instead."
+        }
+      },
+      "Resources": [{ "Type": "AwsEc2SecurityGroup", "Id": "arn:aws:ec2:us-east-1:111122223333:security-group/sg-0abc123" }]
+    }
+  ]
+}
