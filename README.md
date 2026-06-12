@@ -12,3 +12,11 @@ npm install
 
 # 3) front end, new terminal
 cd ../frontend && npm install && npm run dev
+
+
+for code security
+go to folder code-secaudit-anthropic-model
+run the commands
+node bin\secaudit.js "C:\path\to\customer-code" --dry-run        # free, lists files
+###This  will genrate the security report
+node bin\secaudit.js "C:\path\to\customer-code" -m sonnet-4.5,opus-4.6,fable-5
