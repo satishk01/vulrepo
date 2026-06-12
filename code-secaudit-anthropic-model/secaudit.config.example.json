@@ -1,0 +1,14 @@
+{
+  "modelAliases": {
+    "sonnet-4.5": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "opus-4.5":   "us.anthropic.claude-opus-4-5-20251101-v1:0",
+    "fable-5":    "global.anthropic.claude-fable-5-v1:0"
+  },
+  "analysis": {
+    "concurrency": 4,
+    "maxChunkChars": 60000,
+    "maxTokensPerResponse": 8192,
+    "maxFileBytes": 307200
+  }
+}
+

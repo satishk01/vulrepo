@@ -1,0 +1,25 @@
+{
+  "name": "claude-secaudit",
+  "version": "1.0.0",
+  "description": "AI-powered deep security code review CLI using Anthropic Claude models on AWS Bedrock. Finds logic-level vulnerabilities that SAST/DAST scanners miss.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "secaudit": "bin/secaudit.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/secaudit.js"
+  },
+  "keywords": ["security", "code-review", "sast", "bedrock", "claude", "appsec"],
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1067.0",
+    "commander": "^15.0.0",
+    "fast-glob": "^3.3.3",
+    "p-limit": "^4.0.0",
+    "picocolors": "^1.1.1"
+  }
+}

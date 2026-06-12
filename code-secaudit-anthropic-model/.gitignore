@@ -1,0 +1,4 @@
+node_modules/
+secaudit-report/
+secaudit.config.json
+*.log
