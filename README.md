@@ -20,3 +20,14 @@ run the commands
 node bin\secaudit.js "C:\path\to\customer-code" --dry-run        # free, lists files
 ###This  will genrate the security report
 node bin\secaudit.js "C:\path\to\customer-code" -m sonnet-4.5,opus-4.6,fable-5
+
+
+---- Ccode analysis with TM
+
+
+npm install
+node bin\secaudit.js "C:\path\to\code" -m sonnet-4.5,opus-4.6     # recommended for production
+node bin\secaudit.js "C:\path\to\code" --threat-models stride,attack   # pick passes
+node bin\secaudit.js "C:\path\to\code" --no-threat-model               # code findings only
+
+

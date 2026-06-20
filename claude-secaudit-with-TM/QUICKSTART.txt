@@ -1,0 +1,43 @@
+==================================================================
+ claude-secaudit  —  QUICK START (Windows)
+==================================================================
+
+1) INSTALL NODE.JS (one time)
+   Download LTS from https://nodejs.org/ and install.
+   Open a NEW PowerShell window, confirm:  node --version
+
+2) INSTALL DEPENDENCIES (one time)
+   In PowerShell:
+       cd C:\path\to\claude-secaudit
+       npm install
+
+3) SET AWS CREDENTIALS (per PowerShell window)
+       $env:AWS_ACCESS_KEY_ID     = "AKIA..."
+       $env:AWS_SECRET_ACCESS_KEY = "..."
+       $env:AWS_REGION            = "us-east-1"
+   (or use a profile:  --profile your-profile-name)
+
+4) ENABLE BEDROCK MODELS (one time, in AWS Console)
+   Amazon Bedrock -> Model access -> enable the Claude models.
+
+5) CONFIRM MODEL IDs IN YOUR ACCOUNT
+       aws bedrock list-foundation-models --by-provider anthropic ^
+           --region us-east-1 --query "modelSummaries[].modelId"
+   If they differ from defaults, put overrides in secaudit.config.json
+   (see README "Configuring model IDs").
+
+6) RUN
+   Dry run (free, lists files):
+       node bin\secaudit.js "C:\path\to\code" --dry-run
+
+   Real scan (default model):
+       node bin\secaudit.js "C:\path\to\code"
+
+   Multi-model deep scan:
+       node bin\secaudit.js "C:\path\to\code" -m sonnet-4.5,opus-4.6,fable-5
+
+   Output: secaudit-report\report.html  (open in a browser)
+
+------------------------------------------------------------------
+Full docs, options, and troubleshooting: see README.md
+==================================================================
