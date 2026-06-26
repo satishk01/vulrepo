@@ -1,0 +1,98 @@
+==================================================================
+ claude-secaudit v2  —  QUICK START (multi-provider, BYOK)
+==================================================================
+
+1) INSTALL NODE.JS 18+ (one time)
+   Download LTS from https://nodejs.org/ and install.
+   Open a NEW terminal, confirm:  node --version   (want v18+, ideally v20+)
+
+2) INSTALL DEPENDENCIES (one time)
+       cd <path-to>/claude-secaudit
+       npm install
+
+3) SEE AVAILABLE MODELS / PROVIDERS
+       node bin/secaudit.js --list-models
+
+4) SET CREDENTIALS FOR THE PROVIDER YOU WANT (BYOK — pick one)
+
+   Anthropic API (Opus 4.8, etc.):
+       export ANTHROPIC_API_KEY=sk-ant-...
+       (Windows PowerShell:  $env:ANTHROPIC_API_KEY = "sk-ant-...")
+
+   AWS Bedrock (original path, retained):
+       export AWS_ACCESS_KEY_ID=AKIA...
+       export AWS_SECRET_ACCESS_KEY=...
+       export AWS_REGION=us-east-1
+       (enable Claude models in Bedrock Console -> Model access)
+
+   Google Gemini:        export GOOGLE_API_KEY=...
+   OpenRouter (GLM 5.2): export OPENROUTER_API_KEY=sk-or-...
+   Azure OpenAI:         export AZURE_OPENAI_API_KEY=...
+                         export AZURE_OPENAI_ENDPOINT=https://<res>.openai.azure.com
+   Ollama (local):       (no key)  export OLLAMA_HOST=http://localhost:11434
+
+   Full per-provider env-var list: README.md -> "Credentials (BYOK)".
+
+5) DRY RUN (free, lists files, no API calls)
+       node bin/secaudit.js "/path/to/code" --dry-run
+
+6) RUN A SCAN — choose provider/model with -m
+       # Anthropic Opus 4.8
+       node bin/secaudit.js "/path/to/code" -m opus-4.8
+
+       # AWS Bedrock (default behaviour)
+       node bin/secaudit.js "/path/to/code" -m bedrock-sonnet-4.5
+
+       # Google Gemini 3.5
+       node bin/secaudit.js "/path/to/code" -m gemini-3.5
+
+       # OpenRouter: GLM 5.2 + Claude + Gemini in one run
+       node bin/secaudit.js "/path/to/code" -m glm-5.2-or,anthropic-4.5-or,gemini-3.5-or
+
+       # Azure GPT-4 and GPT-5.5
+       node bin/secaudit.js "/path/to/code" -m azure-gpt4,azure-gpt5.5
+
+       # Local Ollama
+       node bin/secaudit.js "/path/to/code" -m ollama-qwen
+
+       # Mix providers for consensus
+       node bin/secaudit.js "/path/to/code" -m bedrock-opus-4.8,gemini-3.5,glm-5.2-or
+
+   Output: secaudit-report/report.html  (open in a browser)
+           secaudit-report/findings.json
+
+   Windows note: use  node bin\secaudit.js ...  (backslashes), or the
+   bundled  secaudit.cmd  wrapper.
+
+------------------------------------------------------------------
+To override/fix model IDs (e.g. Azure deployment names) without
+editing code, copy secaudit.config.example.json to
+secaudit.config.json and edit the "models" map.
+
+Full docs, options, troubleshooting: README.md
+==================================================================
+
+==================================================================
+ NEW IN v3: NON-LLM SCANNERS (--mode)
+==================================================================
+
+You can now also run free, traditional security scanners and merge
+them with the AI review.
+
+  --mode llm        AI only (default)
+  --mode scanners   traditional scanners only (NO AI key needed)
+  --mode both       AI + scanners, merged into one report
+
+Install the scanners you want (bring your own tools):
+  pip install semgrep bandit checkov
+  brew install gitleaks trivy        (or download release binaries)
+
+See them all:
+  node bin/secaudit.js --list-scanners
+
+Examples:
+  node bin/secaudit.js "/path/to/code" --mode scanners
+  node bin/secaudit.js "/path/to/code" --mode both -m opus-4.8
+
+Full step-by-step instructions (Parts 6 & 7) are in the Word guide.
+==================================================================

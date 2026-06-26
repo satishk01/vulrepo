@@ -31,3 +31,13 @@ node bin\secaudit.js "C:\path\to\code" --threat-models stride,attack   # pick pa
 node bin\secaudit.js "C:\path\to\code" --no-threat-model               # code findings only
 
 
+Command to install scanners
+pip install semgrep bandit checkov
+
+semgrep --version
+bandit --version
+checkov --version
+
+
+winget install gitleaks
+winget install AquaSecurity.Trivy

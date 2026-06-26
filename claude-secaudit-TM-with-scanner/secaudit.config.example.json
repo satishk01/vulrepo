@@ -1,0 +1,23 @@
+{
+  "_comment": "Optional. Copy to secaudit.config.json in your working dir. No secrets here — credentials are env vars (BYOK), and scanners are tools you install (BYOT).",
+
+  "_comment_models": "The 'models' map adds or overrides AI model aliases. Each value is { provider, modelId } OR a 'provider:modelId' string OR a bare string (treated as a Bedrock model id).",
+  "models": {
+    "opus-4.8":   { "provider": "anthropic", "modelId": "claude-opus-4-8" },
+    "gemini-3.5": { "provider": "google", "modelId": "gemini-3.5-pro" },
+    "glm-5.2-or": { "provider": "openrouter", "modelId": "z-ai/glm-5.2" },
+    "azure-gpt4": { "provider": "azure", "modelId": "my-gpt4-deployment-name" }
+  },
+
+  "_comment_scanners": "Optional scanner tuning. 'default' is the list used when --mode includes scanners and you don't pass -s. You normally don't need this section; install the tools and they're auto-detected.",
+  "scanners": {
+    "default": ["semgrep", "bandit", "gosec", "gitleaks", "trivy", "osv-scanner", "checkov"]
+  },
+
+  "analysis": {
+    "concurrency": 4,
+    "maxChunkChars": 60000,
+    "maxTokensPerResponse": 8192,
+    "maxFileBytes": 307200
+  }
+}

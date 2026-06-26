@@ -1,0 +1,48 @@
+{
+  "name": "claude-secaudit",
+  "version": "3.0.0",
+  "description": "Security code review CLI combining AI models (Bedrock, Anthropic, Gemini/Vertex, OpenRouter, Azure, Ollama; BYOK) with open-source non-LLM scanners (Semgrep, Bandit, gosec, Gitleaks, Trivy, OSV-Scanner, Checkov). Run AI, scanners, or both.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "secaudit": "bin/secaudit.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/secaudit.js"
+  },
+  "keywords": [
+    "security",
+    "code-review",
+    "sast",
+    "appsec",
+    "bedrock",
+    "anthropic",
+    "gemini",
+    "openrouter",
+    "azure-openai",
+    "ollama",
+    "glm",
+    "byok",
+    "llm",
+    "semgrep",
+    "trivy",
+    "gitleaks",
+    "checkov",
+    "bandit",
+    "sca",
+    "iac",
+    "secrets",
+    "devsecops"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1067.0",
+    "commander": "^15.0.0",
+    "fast-glob": "^3.3.3",
+    "p-limit": "^4.0.0",
+    "picocolors": "^1.1.1"
+  }
+}
